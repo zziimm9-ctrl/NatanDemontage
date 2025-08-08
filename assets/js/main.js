@@ -2,7 +2,6 @@
 const yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-// translations
 const t = {
   ru: {
     menu_about: "О нас",
@@ -12,15 +11,16 @@ const t = {
     hero_tagline: "Быстро, чисто, надёжно. Кобленц и вся Рейнланд-Пфальц.",
     cta_contact: "Связаться",
     about_title: "О нас",
-    about_text_1: "Мы — сильная команда из Кобленца, специализируемся на профессиональных демонтажных работах и безопасной асбестовой санации. Работаем быстро, аккуратно и пунктуально.",
-    about_text_2: "Выполняем пробивку проёмов, полный разбор зданий, выемку конструкций и правильную утилизацию материалов. Оформляем объект под «чистую сдачу» — без мусора и пыли.",
+    about_text_1: "Мы — сильная команда из Кобленца...",
+    about_text_2: "Выполняем пробивку проёмов...",
     services_title: "Наши услуги",
     service_1: "Демонтаж любой сложности",
-    service_2: "Сертифицированное удаление асбеста (Asbest-Schein)",
-    service_3: "Вывоз строительного мусора, «под метлу»",
-    service_4: "Работы по всей земле Рейнланд-Пфальц и окрестностям",
-    service_5: "Быстро, пунктуально, без лишней бюрократии",
+    service_2: "Сертифицированное удаление асбеста",
+    service_3: "Вывоз строительного мусора",
+    service_4: "Работы по всей земле",
+    service_5: "Быстро, пунктуально",
     photos_title: "Фото работ",
+    photos_hint: "Позже здесь сделаем галерею.",
     contacts_title: "Контакты",
     btn_write: "Написать нам"
   },
@@ -32,15 +32,16 @@ const t = {
     hero_tagline: "Schnell, sauber, zuverlässig. Koblenz & ganz Rheinland-Pfalz.",
     cta_contact: "Kontakt",
     about_title: "Über uns",
-    about_text_1: "Wir sind ein starkes Team aus Koblenz, spezialisiert auf professionelle Demontagearbeiten und fachgerechte Asbestsanierung – schnell, sauber, pünktlich.",
-    about_text_2: "Wir übernehmen Wanddurchbrüche, kompletten Rückbau, Entkernung sowie die ordnungsgemäße Entsorgung der Materialien. Übergabe besenrein – ohne Staub und Schutt.",
+    about_text_1: "Wir sind ein starkes Team aus Koblenz...",
+    about_text_2: "Wir übernehmen Wanddurchbrüche...",
     services_title: "Unsere Leistungen",
     service_1: "Demontage jeder Art",
-    service_2: "Zertifizierte Asbest-Entfernung (Asbest-Schein)",
-    service_3: "Schuttentsorgung und besenreine Übergabe",
-    service_4: "Arbeiten in ganz Rheinland-Pfalz und Umgebung",
-    service_5: "Schnell, pünktlich, unkompliziert",
+    service_2: "Zertifizierte Asbest-Entfernung",
+    service_3: "Schuttentsorgung",
+    service_4: "Arbeiten in ganz Rheinland-Pfalz",
+    service_5: "Schnell, pünktlich",
     photos_title: "Arbeitsfotos",
+    photos_hint: "Hier fügen wir später eine Galerie ein.",
     contacts_title: "Kontakt",
     btn_write: "Schreiben"
   }
@@ -60,15 +61,14 @@ function setLang(lang) {
 document.getElementById('ruBtn').addEventListener('click', () => setLang('ru'));
 document.getElementById('deBtn').addEventListener('click', () => setLang('de'));
 
-const saved = localStorage.getItem('lang') || (navigator.language.startsWith('de') ? 'de' : 'ru');
-setLang(saved);
+const saved = localStorage.getItem('lang');
+setLang(saved ? saved : 'de');
 
-// "Write us" button opens mailto with a template
 document.getElementById('writeBtn').addEventListener('click', () => {
   const subjectMap = { ru: "Заявка с сайта NATAN Demontage", de: "Anfrage von der Website NATAN Demontage" };
   const bodyMap = {
-    ru: "Здравствуйте!\\n\\nМне нужны работы по демонтажу/асбесту. Опишите задачу:",
-    de: "Guten Tag!\\n\\nIch benötige Abbruch-/Asbestarbeiten. Beschreiben Sie bitte die Aufgabe:"
+    ru: "Здравствуйте!\n\nМне нужны работы по демонтажу/асбесту. Опишите задачу:",
+    de: "Guten Tag!\n\nIch benötige Abbruch-/Asbestarbeiten. Beschreiben Sie bitte die Aufgabe:"
   };
   const lang = document.documentElement.lang === 'de' ? 'de' : 'ru';
   const mailto = `mailto:natandemontage@gmx.de?subject=${encodeURIComponent(subjectMap[lang])}&body=${encodeURIComponent(bodyMap[lang])}`;
